@@ -9,20 +9,21 @@ function calculatePrice({
   hasSauce,
   hasCheese
 }) {
-  /*
-  Escribir una función calculatePrice que recibe los parámetros
-  nPepperonis, nBasils, nMushrooms, hasSauce y hasCheese (los primeros 
-  tres son números, los últimos dos booleans). La función deberá retornar 
-  el precio total, calculado considerando que:
+  let precio_total = 5;
 
-    1. El precio base de la pizza es 5
-    2. Cada pepperoni vale 0.5, cada albahaca vale 0.3 y cada champiñon vale 0.1
-    3. Si lleva salsa se suma 1, si lleva queso se suma 1.5 
-  */
-  // La salida de esta función aparecerá en consola (para debuggear)
-  // if / else if / else
-  // Operaciones matemáticas
-  // Retornar número
+  precio_total += nPepperonis * 0.5;
+  precio_total += nBasils * 0.3;
+  precio_total += nMushrooms * 0.1;
+
+  if (hasSauce) {
+    precio_total += 1;
+  }
+
+  if (hasCheese) {
+    precio_total += 1.5;
+  }
+
+  return precio_total;
 }
 
 function displayInvoice({
@@ -43,6 +44,30 @@ function displayInvoice({
   // document.createTextNode(...);
   // elem.appendChild(...);
   // No es necesario retornar algo
+
+  const summaryDiv = document.getElementById("order-summary");
+  summaryDiv.innerHTML = "";
+  const ul = document.createElement("ul");
+  const createItem = (text) => {
+    const li = document.createElement("li");
+    li.appendChild(document.createTextNode(text));
+    return li;
+  };
+
+  if (hasSauce) ul.appendChild(createItem("Salsa: Sí ($1)"));
+  if (hasCheese) ul.appendChild(createItem("Queso: Sí ($1.5)"));
+  if (nPepperonis > 0) ul.appendChild(createItem(`Pepperoni: ${nPepperonis} ($${nPepperonis * 0.5})`));
+  if (nBasils > 0) ul.appendChild(createItem(`Albahaca: ${nBasils} ($${nBasils * 0.3})`));
+  if (nMushrooms > 0) ul.appendChild(createItem(`Champiñones: ${nMushrooms} ($${nMushrooms * 0.1})`));
+
+  const total = calculatePrice({ nPepperonis, nBasils, nMushrooms, hasSauce, hasCheese });
+
+  const pTotal = document.createElement("p");
+  pTotal.style.fontWeight = "bold";
+  pTotal.appendChild(document.createTextNode(`Precio Total: $${total.toFixed(2)}`));
+
+  summaryDiv.appendChild(ul);
+  summaryDiv.appendChild(pTotal);
 }
 
 /*
