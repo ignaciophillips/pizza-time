@@ -9,6 +9,7 @@ function calculatePrice({
   hasSauce,
   hasCheese
 }) {
+
   let precio_total = 5;
 
   precio_total += nPepperonis * 0.5;
@@ -33,17 +34,6 @@ function displayInvoice({
   hasSauce,
   hasCheese
 }) {
-  /*
-  Escribir una funcion displayInvoice para mostrar un resumen de los ingredientes elegidos 
-  y que incluya el precio total (utilizar función calculatePrice). Se recomienda agregar 
-  elementos HTML apropiados en el DIV con id "order-summary". Por ejemplo, se pueden usar
-  tags LI dentro de un tag UL para cada ingrediente, y mostrar un P que contenga el precio.
-  */
-  // document.getElementById(...);
-  // document.createElement(...);
-  // document.createTextNode(...);
-  // elem.appendChild(...);
-  // No es necesario retornar algo
 
   const summaryDiv = document.getElementById("order-summary");
   summaryDiv.innerHTML = "";
